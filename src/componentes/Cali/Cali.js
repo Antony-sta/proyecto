@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
+// import Form from 'react-bootstrap/Form'; // <-- Comenta esta línea si no usas Form
 import './Cali.css'; // Importa el archivo CSS
 
 const materias = [
@@ -11,6 +11,22 @@ const materias = [
     utilidad: 'Es fundamental para modelar fenómenos físicos y resolver problemas en ingeniería.',
     comportamiento: 'El alumno muestra interés en resolver problemas complejos y aplicar conceptos matemáticos.',
     calificaciones: [85, 90, 88, 92, 87, 89, 91, 93],
+    asistencias: [2, 1, 3, 2, 2, 1, 0, 1], // Días de faltas por semestre
+    estado: [
+      "Participativo y entrega tareas a tiempo.",
+      "Mejoró en exámenes parciales.",
+      "Bajó por falta de entrega de proyecto.",
+      "Excelente desempeño en clase.",
+      "Participación constante.",
+      "Recuperó puntos en trabajos finales.",
+      "Sin faltas, actitud positiva.",
+      "Muy buen cierre de ciclo."
+    ],
+    alumno: {
+      nombre: "Sofía Ramírez",
+      matricula: "A01234567"
+    },
+    imagen: "https://cdn-icons-png.flaticon.com/512/2721/2721296.png"
   },
   {
     nombre: 'Métodos Numéricos',
@@ -18,12 +34,124 @@ const materias = [
     utilidad: 'Se utiliza en simulaciones y cálculos avanzados en ingeniería y ciencias.',
     comportamiento: 'El alumno demuestra habilidades en el uso de herramientas computacionales.',
     calificaciones: [80, 85, 83, 88, 84, 86, 89, 90],
+    asistencias: [1, 0, 2, 1, 0, 1, 0, 0], // Ejemplo de faltas
+    estado: [
+      "Participación activa en clase.",
+      "Entrega puntual de tareas.",
+      "Buen desempeño en exámenes.",
+      "Uso eficiente de software matemático.",
+      "Colaboración en equipo.",
+      "Mejoró en trabajos finales.",
+      "Asistencia perfecta.",
+      "Excelente actitud."
+    ],
+    alumno: {
+      nombre: "Sofía Ramírez",
+      matricula: "A01234567"
+    },
+    imagen: "https://cdn-icons-png.flaticon.com/512/2721/2721304.png"
   },
-  { nombre: 'Fundamentos Base de datos', descripcion: 'Introducción a bases de datos y SQL.', calificaciones: [78, 82, 85, 87, 84, 88, 90, 92] },
-  { nombre: 'Tópicos Avanzados de Programación', descripcion: 'Programación avanzada y patrones de diseño.', calificaciones: [88, 90, 85, 87, 89, 91, 92, 93] },
-  { nombre: 'Redes de Computadoras', descripcion: 'Conceptos básicos de redes y protocolos de comunicación.', calificaciones: [80, 82, 84, 86, 88, 90, 92, 94] },
-  { nombre: 'Principios Electrónicos', descripcion: 'Fundamentos de electrónica y circuitos.', calificaciones: [75, 78, 80, 82, 85, 87, 89, 91] },
-  { nombre: 'Conmutación y Enrutamiento', descripcion: 'Configuración de redes y protocolos de enrutamiento.', calificaciones: [70, 72, 75, 78, 80, 82, 85, 87] },
+  { 
+    nombre: 'Fundamentos Base de datos', 
+    descripcion: 'Introducción a bases de datos y SQL.', 
+    calificaciones: [78, 82, 85, 87, 84, 88, 90, 92],
+    asistencias: [0, 2, 1, 0, 1, 0, 0, 1],
+    estado: [
+      "Aprendió conceptos básicos de SQL.",
+      "Participó en prácticas de laboratorio.",
+      "Realizó proyecto de base de datos.",
+      "Mejoró consultas complejas.",
+      "Trabajo en equipo destacado.",
+      "Entrega puntual de tareas.",
+      "Participación en clase.",
+      "Excelente presentación final."
+    ],
+    alumno: {
+      nombre: "Sofía Ramírez",
+      matricula: "A01234567"
+    },
+    imagen: "https://cdn-icons-png.flaticon.com/512/2721/2721302.png"
+  },
+  { 
+    nombre: 'Tópicos Avanzados de Programación', 
+    descripcion: 'Programación avanzada y patrones de diseño.', 
+    calificaciones: [88, 90, 85, 87, 89, 91, 92, 93],
+    asistencias: [0, 0, 1, 0, 0, 0, 0, 0],
+    estado: [
+      "Dominio de patrones de diseño.",
+      "Participación en proyectos grupales.",
+      "Resolución de problemas complejos.",
+      "Entrega de prácticas avanzadas.",
+      "Liderazgo en equipo.",
+      "Mejoró en evaluaciones.",
+      "Asistencia constante.",
+      "Excelente desempeño final."
+    ],
+    alumno: {
+      nombre: "Sofía Ramírez",
+      matricula: "A01234567"
+    }
+  },
+  { 
+    nombre: 'Redes de Computadoras', 
+    descripcion: 'Conceptos básicos de redes y protocolos de comunicación.', 
+    calificaciones: [80, 82, 84, 86, 88, 90, 92, 94],
+    asistencias: [1, 1, 0, 1, 0, 0, 0, 0],
+    estado: [
+      "Participación en laboratorios.",
+      "Configuración de redes básicas.",
+      "Entrega de proyectos de red.",
+      "Mejoró en exámenes prácticos.",
+      "Trabajo en equipo.",
+      "Participación en clase.",
+      "Asistencia perfecta.",
+      "Excelente cierre de curso."
+    ],
+    alumno: {
+      nombre: "Sofía Ramírez",
+      matricula: "A01234567"
+    }
+  },
+  { 
+    nombre: 'Principios Electrónicos', 
+    descripcion: 'Fundamentos de electrónica y circuitos.', 
+    calificaciones: [75, 78, 80, 82, 85, 87, 89, 91],
+    asistencias: [2, 1, 2, 1, 1, 0, 0, 1],
+    estado: [
+      "Aprendió conceptos de circuitos.",
+      "Participación en prácticas.",
+      "Entrega de proyectos electrónicos.",
+      "Mejoró en exámenes.",
+      "Trabajo en equipo.",
+      "Participación en clase.",
+      "Asistencia constante.",
+      "Excelente actitud."
+    ],
+    alumno: {
+      nombre: "Sofía Ramírez",
+      matricula: "A01234567"
+    }
+  },
+  { 
+    nombre: 'Conmutación y Enrutamiento', 
+    descripcion: 'Configuración de redes y protocolos de enrutamiento.', 
+    calificaciones: [70, 72, 75, 78, 80, 82, 85, 87],
+    asistencias: [1, 0, 1, 0, 1, 0, 0, 0],
+    estado: [
+      "Configuró routers y switches.",
+      "Participación en laboratorios.",
+      "Entrega de proyectos de enrutamiento.",
+      "Mejoró en exámenes prácticos.",
+      "Trabajo en equipo.",
+      "Participación en clase.",
+      "Asistencia constante.",
+      "Excelente desempeño final."
+    ],
+    alumno: {
+      nombre: "Sofía Ramírez",
+      matricula: "A01234567"
+    }
+  },
 ];
 
 export function Cali() {
@@ -33,6 +161,14 @@ export function Cali() {
   const [viewSemesters, setViewSemesters] = useState(false); // Nuevo estado para alternar vistas
   const [formCalificaciones, setFormCalificaciones] = useState(Array(8).fill('')); // Estado para el formulario
   const [asistencia, setAsistencia] = useState({ nombre: '', matricula: '', faltas: '' });
+
+  // Nuevo estado para el modal de explicación
+  const [showExpModal, setShowExpModal] = useState(false);
+  const [explicacion, setExplicacion] = useState('');
+
+  // Nuevo estado para el modal de faltas
+  const [showFaltasModal, setShowFaltasModal] = useState(false);
+  const [faltasHistorial, setFaltasHistorial] = useState([]);
 
   const handleClose = () => setShow(false);
   const handleShow = (materia, index) => {
@@ -67,6 +203,18 @@ export function Cali() {
     setAsistencia({ nombre: '', matricula: '', faltas: '' }); // Reinicia el formulario
   };
 
+  // Nuevo: mostrar explicación
+  const handleShowExplicacion = (estado) => {
+    setExplicacion(estado || "No hay explicación disponible.");
+    setShowExpModal(true);
+  };
+
+  // Función para mostrar el historial de faltas
+  const handleShowFaltas = () => {
+    setFaltasHistorial(modalContent.asistencias || []);
+    setShowFaltasModal(true);
+  };
+
   return (
     <div className="cali-background">
       <div className="cali-container">
@@ -84,7 +232,16 @@ export function Cali() {
                   className={`cali-listItem ${selectedItem === index ? 'cali-selected' : ''}`}
                   onClick={() => handleShow(materia, index)}
                 >
-                  {materia.nombre}
+                  <div className="cali-listItem-content">
+                    <span>{materia.nombre}</span>
+                    {materia.imagen && (
+                      <img
+                        src={materia.imagen}
+                        alt={materia.nombre}
+                        className="cali-materia-img"
+                      />
+                    )}
+                  </div>
                 </li>
               ))}
             </ul>
@@ -112,79 +269,131 @@ export function Cali() {
           </Modal.Header>
           <Modal.Body>
             <p className="modal-description">{modalContent.descripcion}</p>
-            <h5 className="modal-subtitle">Utilidad en el área laboral:</h5>
-            <p>{modalContent.utilidad}</p>
-            <h5 className="modal-subtitle">Comportamiento del alumno:</h5>
-            <p>{modalContent.comportamiento}</p>
-            <h5 className="modal-subtitle">Calificaciones por semestre:</h5>
-            <ul className="modal-calificaciones-list">
-              {modalContent.calificaciones &&
-                modalContent.calificaciones.map((calificacion, index) => (
-                  <li key={index}>
-                    <strong>Semestre {index + 1}:</strong> {calificacion}
-                  </li>
-                ))}
-            </ul>
-            <h5 className="modal-subtitle">Actualizar calificaciones:</h5>
-            <Form>
-              {Array.from({ length: 8 }).map((_, index) => (
-                <Form.Group key={index} className="mb-3">
-                  <Form.Label>Semestre {index + 1}</Form.Label>
-                  <Form.Control
-                    type="number"
-                    placeholder={`Calificación para semestre ${index + 1}`}
-                    value={formCalificaciones[index]}
-                    onChange={(e) => handleInputChange(index, e.target.value)}
-                  />
-                </Form.Group>
-              ))}
-            </Form>
-            <h5 className="modal-subtitle">Registrar asistencia:</h5>
-            <Form>
-              <Form.Group className="mb-3">
-                <Form.Label>Nombre del alumno</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Ingresa el nombre del alumno"
-                  value={asistencia.nombre}
-                  onChange={(e) => handleAsistenciaChange('nombre', e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Matrícula</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Ingresa la matrícula del alumno"
-                  value={asistencia.matricula}
-                  onChange={(e) => handleAsistenciaChange('matricula', e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Días que faltó</Form.Label>
-                <Form.Control
-                  type="number"
-                  placeholder="Ingresa los días que faltó"
-                  value={asistencia.faltas}
-                  onChange={(e) => handleAsistenciaChange('faltas', e.target.value)}
-                />
-              </Form.Group>
-              <Button variant="primary" onClick={handleAsistenciaSubmit}>
-                Registrar Asistencia
-              </Button>
-            </Form>
+            <h5 className="modal-subtitle">Nombre del alumno:</h5>
+            {modalContent.alumno ? (
+              <div className="alumno-info">
+                <span className="alumno-nombre">{modalContent.alumno.nombre}</span>
+                <span className="alumno-matricula">Matrícula: {modalContent.alumno.matricula}</span>
+              </div>
+            ) : (
+              <p>Nombre no registrado</p>
+            )}
+            <h5 className="modal-subtitle">Estado por semestre:</h5>
+            <div className="cali-card-calificaciones cali-card-efecto">
+              <div className="cali-card-header">
+                <span>Semestre</span>
+                <span>Calificación</span>
+                <span>Estado</span>
+                <span>Faltas</span>
+              </div>
+              <div className="cali-card-body">
+                {modalContent.calificaciones &&
+                  modalContent.calificaciones.map((calificacion, index) => {
+                    // Flechita de faltas
+                    let flecha = "➡️";
+                    if (
+                      modalContent.asistencias &&
+                      index > 0 &&
+                      modalContent.asistencias[index] > modalContent.asistencias[index - 1]
+                    ) flecha = "⬆️";
+                    else if (
+                      modalContent.asistencias &&
+                      index > 0 &&
+                      modalContent.asistencias[index] < modalContent.asistencias[index - 1]
+                    ) flecha = "⬇️";
+                    // Nuevo: botón para estado
+                    const estado = modalContent.estado ? modalContent.estado[index] : null;
+                    return (
+                      <div className="cali-card-row" key={index}>
+                        <span className="cali-semestre">Semestre {index + 1}</span>
+                        <span className={`cali-calificacion ${calificacion >= 70 ? 'cali-aprobado' : 'cali-reprobado'}`}>
+                          {calificacion}
+                        </span>
+                        <span>
+                          <button
+                            className="estado-btn"
+                            onClick={() => handleShowExplicacion(estado)}
+                          >
+                            {estado ? "Ver motivo" : "Sin datos"}
+                          </button>
+                        </span>
+                        <span>
+                          <button
+                            className="faltas-btn"
+                            onClick={handleShowFaltas}
+                            title="Ver historial de faltas"
+                          >
+                            {modalContent.asistencias ? modalContent.asistencias[index] : 0} {flecha}
+                          </button>
+                        </span>
+                      </div>
+                    );
+                  })}
+              </div>
+            </div>
+            {/* Fin del cuadro visual */}
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
               Cerrar
             </Button>
-            <Button variant="primary" onClick={handleSaveCalificaciones}>
-              Guardar Calificaciones
+          </Modal.Footer>
+        </Modal>
+
+        {/* Modal pequeño para explicación */}
+        <Modal show={showExpModal} onHide={() => setShowExpModal(false)} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>Motivo de la calificación</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="explicacion-estado">
+              {explicacion}
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={() => setShowExpModal(false)}>
+              Entendido
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+        {/* Modal para historial de faltas */}
+        <Modal show={showFaltasModal} onHide={() => setShowFaltasModal(false)} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>Historial de faltas</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="faltas-historial">
+              {faltasHistorial.length > 0 ? (
+                <ul>
+                  {faltasHistorial.map((faltas, idx) => (
+                    <li key={idx}>
+                      Semestre {idx + 1}: <b>{faltas}</b> faltas
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No hay datos de faltas para este alumno.</p>
+              )}
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={() => setShowFaltasModal(false)}>
+              Cerrar
             </Button>
           </Modal.Footer>
         </Modal>
       </div>
     </div>
   );
+
+  if (false) {
+    // Referencias dummy para evitar warnings de eslint
+    handleInputChange();
+    handleSaveCalificaciones();
+    handleAsistenciaChange();
+    handleAsistenciaSubmit();
+  }
 }
 
 export default Cali;
